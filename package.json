@@ -1,0 +1,26 @@
+{
+  "name": "angularjs_with_auth0",
+  "version": "1.0.0",
+  "description": "AngularJs using Auth0, for practice purpose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jenhaohsiao/AngularJs_with_Auth0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jenhaohsiao/AngularJs_with_Auth0/issues"
+  },
+  "homepage": "https://github.com/Jenhaohsiao/AngularJs_with_Auth0#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.22",
+    "angular": "^1.7.8",
+    "angular-auth0": "^3.0.0",
+    "auth0-js": "^9.10.1",
+    "bootstrap": "^4.3.1"
+  }
+}
