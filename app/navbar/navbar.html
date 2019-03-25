@@ -7,7 +7,10 @@
 
         <div class="">
             <ul class="nav navbar-nav">
-                <li><a href="">Home</a></li>
+                <li>
+                    <a ui-sref="home">home</a>
+                </li>
+
                 <li ng-if="vm.auth.isAuthenticated()">
                     <a ui-sref="profile">Profile</a>
                 </li>

@@ -3,6 +3,7 @@
     angular.module('app', [
         'auth0.auth0',
         'ui.router',
+        'angular-jwt'
     ])
 
     .config(config);
@@ -11,14 +12,18 @@
         '$stateProvider',
         '$locationProvider',
         '$urlRouterProvider',
-        'angularAuth0Provider'
+        'angularAuth0Provider',
+        'jwtOptionsProvider',
+        '$httpProvider',
     ]
 
     function config(
         $stateProvider,
         $locationProvider,
         $urlRouterProvider,
-        angularAuth0Provider
+        angularAuth0Provider,
+        jwtOptionsProvider,
+        $httpProvider,
     ) {
 
         console.log("App loaded")
@@ -54,6 +59,17 @@
             scope: 'openid profile',
             audience: 'https://angularjs-auth0/api'
         });
+
+        jwtOptionsProvider.config({
+
+            tokenGetter: function() {
+                return localStorage.getItem('access_token')
+            },
+            whiteListedDomains: ['localhost'],
+
+        })
+
+        $httpProvider.interceptors.push('jwtInterceptor');
 
         $urlRouterProvider.otherwise('/');
 

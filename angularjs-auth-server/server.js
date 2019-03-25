@@ -22,7 +22,9 @@ app.use(cors());
 app.use(jwtCheck);
 
 app.get('/authorized', function(req, res) {
-    res.send('Secured Resource');
+    res.json({
+        message: 'This is a scecure endpoint',
+    })
 });
 
 app.listen(port);
