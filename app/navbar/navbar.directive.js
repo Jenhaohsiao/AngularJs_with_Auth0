@@ -5,9 +5,13 @@
         .module('app')
         .directive('navbar', navbar);
 
-    navbar.$inject = [];
+    navbar.$inject = [
 
-    function navbar() {
+    ];
+
+    function navbar(
+
+    ) {
 
         var directive = {
             templateUrl: 'app/navbar/navbar.html',
@@ -19,7 +23,7 @@
         function link(scope, element, attrs) {}
     }
     /* @ngInject */
-    function ControllerController() {
+    function ControllerController(authService) {
 
     }
 })();
@@ -32,9 +36,15 @@
         .module('app')
         .controller('navbarController', navbarController);
 
-    navbarController.$inject = [];
+    navbarController.$inject = [
+        'authService',
+    ];
 
-    function navbarController() {
+    function navbarController(
+        authService,
+    ) {
+        var vm = this;
+        vm.auth = authService;
 
     }
 })();

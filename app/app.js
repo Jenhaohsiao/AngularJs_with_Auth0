@@ -20,7 +20,6 @@
         $urlRouterProvider,
         angularAuth0Provider
     ) {
-        $urlRouterProvider.otherwise('/');
 
         console.log("App loaded")
 
@@ -38,6 +37,18 @@
             templateUrl: 'app/callback/callback.html',
             controllerAs: "vm",
         })
+
+
+        angularAuth0Provider.init({
+            clientID: 'W89785j7YPJJ8MO6HTvyIzxE5szdqIft',
+            domain: 'jenhao.auth0.com',
+            responseType: 'token id_token',
+            redirectUri: 'http://localhost:3000/callback',
+            scope: 'openid'
+        });
+
+        $urlRouterProvider.otherwise('/');
+
 
         // Remove the # from URL
         $locationProvider.hashPrefix('');
