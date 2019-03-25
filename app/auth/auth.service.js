@@ -24,6 +24,10 @@
 
         function logout() {
             console.log("authService logout")
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('id_token');
+            localStorage.removeItem('expires_at');
+
 
         }
 
@@ -42,11 +46,28 @@
                 (authResult.expiresIn * 1000) + new Date().getTime()
             );
 
-            localStorage.setItem('access_token:', authResult.accessToken);
-            localStorage.setItem('id_token:', authResult.idToken);
-            localStorage.setItem('expiresAt:', expiresAt);
+            var profile = {
+                name: authResult.idTokenPayload.name,
+                nickname: authResult.idTokenPayload.nickname,
+                picture: authResult.idTokenPayload.picture,
+            }
 
+            localStorage.setItem('access_token', authResult.accessToken);
+            localStorage.setItem('id_token', authResult.idToken);
+            localStorage.setItem('expires_at', expiresAt);
+            localStorage.setItem('profile', JSON.stringify(profile));
 
+        }
+
+        function isAuthenticated() {
+
+            var expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+
+            var result = (new Date().getTime() < expiresAt)
+
+            console.log("isAuthenticated:", result);
+
+            return result;
 
         }
 
@@ -56,6 +77,7 @@
             login: login,
             logout: logout,
             handleAuthentication: handleAuthentication,
+            isAuthenticated: isAuthenticated,
 
         }
 

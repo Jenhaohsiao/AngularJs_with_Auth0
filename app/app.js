@@ -38,13 +38,21 @@
             controllerAs: "vm",
         })
 
+        .state("profile", {
+            url: "/profile",
+            controller: "ProfileController",
+            templateUrl: 'app/profile/profile.html',
+            controllerAs: "vm",
+        })
+
 
         angularAuth0Provider.init({
             clientID: 'W89785j7YPJJ8MO6HTvyIzxE5szdqIft',
             domain: 'jenhao.auth0.com',
             responseType: 'token id_token',
             redirectUri: 'http://localhost:3000/callback',
-            scope: 'openid'
+            scope: 'openid profile',
+            audience: 'https://angularjs-auth0/api'
         });
 
         $urlRouterProvider.otherwise('/');

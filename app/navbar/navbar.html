@@ -5,12 +5,15 @@
             <a href="#" class="navbar-brand">AngularJs Auth</a>
         </div>
 
-        <div class="collapse navbar-collapse">
+        <div class="">
             <ul class="nav navbar-nav">
                 <li><a href="">Home</a></li>
-                <li><a ng-click="vm.auth.login()">Log In</a></li>
-                <li><a ng-click="vm.auth.logout()">Log Out</a></li>
+                <li ng-if="vm.auth.isAuthenticated()">
+                    <a ui-sref="profile">Profile</a>
+                </li>
 
+                <button ng-if="!vm.auth.isAuthenticated()" ng-click="vm.auth.login()" type="button" class="btn btn-primary">Log In</button>
+                <button ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()" type="button" class="btn btn-danger">Log Out</button>
             </ul>
         </div>
     </div>
