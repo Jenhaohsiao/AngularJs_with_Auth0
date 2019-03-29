@@ -4,7 +4,9 @@ var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 var cors = require('cors');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3001;
+
+app.use(cors());
 
 var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
@@ -18,8 +20,20 @@ var jwtCheck = jwt({
     algorithms: ['RS256']
 });
 
-app.use(cors());
+
+app.get('/api/public', function(req, res) {
+    res.json({
+        message: "Hello, From public endpoint. You don't need to be authenticated to see this.",
+    })
+})
+
+app.get('/api/private', jwtCheck, function(req, res) {
+    res.json({
+        message: "Hello, From private endpoint. You DO need to be authenticated to see this.",
+    })
+})
 app.use(jwtCheck);
+
 
 app.get('/authorized', function(req, res) {
     res.json({
@@ -27,6 +41,7 @@ app.get('/authorized', function(req, res) {
     })
 });
 
-app.listen(port);
 
-console.log("Auth server in running")
+app.listen(port, function() {
+    console.log('Server is running on localhost:', port);
+})

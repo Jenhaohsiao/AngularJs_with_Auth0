@@ -62,11 +62,16 @@
         angularAuth0Provider.init({
             clientID: 'W89785j7YPJJ8MO6HTvyIzxE5szdqIft',
             domain: 'jenhao.auth0.com',
-            responseType: 'token id_token',
+            responseType: 'token id_token', //I will get 2 tokens (access token and id token)
             redirectUri: 'http://localhost:3000/callback',
-            scope: 'openid profile',
+            scope: 'openid profile user_metadata', //Auth0 as part of the authentication transcation. user info based on OIDC (Open ID connect)
             audience: 'https://angularjs-auth0/api'
         });
+
+        // scope: 'openid profile user_metadata', //Auth0 as part of the authentication transcation. user info based on OIDC (Open ID connect)
+
+
+
 
         jwtOptionsProvider.config({
 

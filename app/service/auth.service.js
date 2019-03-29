@@ -9,12 +9,16 @@
         '$state',
         'angularAuth0',
         '$timeout',
+        '$window',
+
     ];
 
     function authService(
         $state,
         angularAuth0,
         $timeout,
+        $window,
+
     ) {
 
         function login() {
@@ -27,6 +31,7 @@
             localStorage.removeItem('access_token');
             localStorage.removeItem('id_token');
             localStorage.removeItem('expires_at');
+            localStorage.removeItem('profile');
 
 
         }
@@ -55,10 +60,24 @@
                 picture: authResult.idTokenPayload.picture,
             }
 
+            function parseJwt(token) {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse($window.atob(base64));
+            }
+
+            var _id_token = parseJwt(authResult.idToken);
+            var _accessToken = parseJwt(authResult.accessToken);
+
+            console.log("id_token:", _id_token)
+            console.log("_accessToken:", _accessToken)
+
             localStorage.setItem('access_token', authResult.accessToken);
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('expires_at', expiresAt);
             localStorage.setItem('profile', JSON.stringify(profile));
+
+
 
         }
 
@@ -68,7 +87,7 @@
 
             var result = (new Date().getTime() < expiresAt)
 
-            console.log("isAuthenticated:", result);
+            // console.log("isAuthenticated:", result);f
 
             return result;
 

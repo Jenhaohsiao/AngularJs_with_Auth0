@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debuging",
-            "program": "${workspaceRoot}/angularjs-auth-server/server.js",
+            "program": "${workspaceRoot}/BackEnd/server.js",
         }
     ]
 }
