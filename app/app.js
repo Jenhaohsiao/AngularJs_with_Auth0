@@ -3,27 +3,34 @@
     angular.module('app', [
         'auth0.auth0',
         'ui.router',
-        'angular-jwt'
+        'angular-jwt',
+        'angular-storage',
+        'ngMaterial',
+
     ])
 
     .config(config);
 
     config.$inject = [
-        '$stateProvider',
-        '$locationProvider',
+        '$provide',
+        // 'authProvider',
         '$urlRouterProvider',
+        '$stateProvider',
+        '$httpProvider',
+        '$locationProvider',
         'angularAuth0Provider',
         'jwtOptionsProvider',
-        '$httpProvider',
     ]
 
     function config(
-        $stateProvider,
-        $locationProvider,
+        $provide,
+        // authProvider,
         $urlRouterProvider,
+        $stateProvider,
+        $httpProvider,
+        $locationProvider,
         angularAuth0Provider,
         jwtOptionsProvider,
-        $httpProvider,
     ) {
 
         console.log("App loaded")
@@ -36,6 +43,13 @@
                 controllerAs: "vm",
             })
 
+        .state("profile", {
+            url: "/profile",
+            controller: "ProfileController",
+            templateUrl: 'app/profile/profile.html',
+            controllerAs: "vm",
+        })
+
         .state("callback", {
             url: "/callback",
             controller: "CallbackController",
@@ -43,12 +57,6 @@
             controllerAs: "vm",
         })
 
-        .state("profile", {
-            url: "/profile",
-            controller: "ProfileController",
-            templateUrl: 'app/profile/profile.html',
-            controllerAs: "vm",
-        })
 
 
         angularAuth0Provider.init({

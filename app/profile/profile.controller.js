@@ -5,9 +5,13 @@
         .module('app')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = [];
+    ProfileController.$inject = [
+        '$http',
+    ];
 
-    function ProfileController() {
+    function ProfileController(
+        $http,
+    ) {
 
         console.log("ProfileController")
 

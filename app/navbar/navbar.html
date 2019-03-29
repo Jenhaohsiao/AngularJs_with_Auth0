@@ -1,11 +1,18 @@
-<nav class="navbar navbar-default">
+<md-toolbar>
 
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a href="#" class="navbar-brand">AngularJs Auth</a>
-        </div>
+    <div class="md-toolbar-tools">
+        <h2>
+            <span>AngularJs Auth</span>
+        </h2>
 
-        <div class="">
+        <md-button ui-sref="home">Home</md-button>
+        <md-button ng-if="vm.auth.isAuthenticated()" ui-sref="profile">Profile</md-button>
+        <md-button ng-if="!vm.auth.isAuthenticated()" ng-click="vm.auth.login()">Log In</md-button>
+        <md-button ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()">Log Out</md-button>
+
+
+
+        <!-- <div class="">
             <ul class="nav navbar-nav">
                 <li>
                     <a ui-sref="home">home</a>
@@ -19,6 +26,6 @@
                 <button ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()" type="button" class="btn btn-danger">Log Out</button>
             </ul>
         </div>
-    </div>
+    </div> -->
 
-</nav>
+</md-toolbar>
